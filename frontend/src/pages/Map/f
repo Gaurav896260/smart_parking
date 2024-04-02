@@ -1,0 +1,18 @@
+const parseAddress = async (address) => {
+  try {
+    const response = await axios.get(
+      `https://nominatim.openstreetmap.org/search?q=${address}&format=json`
+    );
+    if (response.data.length > 0) {
+      const { lat, lon } = response.data[0]; // Extract latitude and longitude
+      return { lat: parseFloat(lat), lng: parseFloat(lon) };
+    } else {
+      throw new Error("No coordinates found for the provided address");
+    }
+  } catch (error) {
+    console.error("Error parsing address:", error);
+    return null; // Return null or handle the error as needed
+  }
+};
+
+YjPvfGjiiAW8VDE4ZKIbI;

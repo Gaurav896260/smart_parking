@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map Example</title>
+  <!-- Include Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+    }
+
+    #my-map {
+      width: 100%;
+      height: 100vh; /* Full viewport height */
+    }
+  </style>
+</head>
+<body>
+  <!-- Create a div to hold the map -->
+  <div id="my-map"></div>
+
+  <!-- Include Leaflet JavaScript -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    // Define handleMapClick function to fetch owner addresses
+    const handleMapClick = async () => {
+      try {
+        // Send GET request to fetch owner addresses
+        const response = await axios.get(
+          "http://localhost:3000/api/owners/getAllOwnerAddresses"
+        );
+
+        // Extract addresses from the response data
+        const addresses = response.data;
+
+        // Log the addresses for debugging
+        console.log("Addresses:", addresses);
+
+        // Return the array of addresses
+        return addresses;
+      } catch (error) {
+        console.error("Error fetching owner addresses:", error);
+        // Return an empty array or handle the error as needed
+        return [];
+      }
+    };
+
+    // Define fetchCoordinates function to fetch coordinates for an address
+    const fetchCoordinates = async (address) => {
+      try {
+        const response = await fetch(
+          `https://api.geoapify.com/v1/geocode/search?text=${address}&format=json&apiKey=f92ad3531ac94bbfab5678453336d853`
+        );
+        const data = await response.json();
+
+        console.log("Results:", data.results[0]); // Log the entire results object
+
+        if (data.results && data.results.length > 0) {
+          const result = data.results[0];
+          if (result.lat && result.lon) {
+            console.log(`Address: ${address}, Latitude: ${result.lat}, Longitude: ${result.lon}`);
+            // Add marker to the map
+            const marker = L.marker([result.lat, result.lon]).addTo(map).bindPopup(address);
+            // Add click event listener to the marker
+            marker.on('click', () => {
+              // Redirect to the new page with the owner's information
+              window.location.href = `/parking-ticket?owner=${encodeURIComponent(address)}`;
+            });
+          } else {
+            console.error("Latitude or longitude is missing in the response for:", address);
+          }
+        } else {
+          console.error("No results found in the response for:", address);
+        }
+      } catch (error) {
+        console.error("Error fetching coordinates:", error);
+      }
+    };
+
+
+    // Define fetchAllCoordinates function to fetch coordinates for all addresses
+    const fetchAllCoordinates = async () => {
+      try {
+        // Call handleMapClick to get the addresses
+        const addresses = await handleMapClick();
+
+        // Call fetchCoordinates for each address
+        addresses.forEach(fetchCoordinates);
+      } catch (error) {
+        console.error("Error fetching and displaying coordinates:", error);
+      }
+    };
+
+    // Initialize map centered around India
+    const map = L.map('my-map').setView([20.5937, 78.9629], 5);
+
+    // Add tile layer from Geoapify with attribution
+    L.tileLayer('https://maps.geoapify.com/v1/tile/osm-carto/{z}/{x}/{y}.png?apiKey=f92ad3531ac94bbfab5678453336d853', {
+      attribution: 'Powered by <a href="https://www.geoapify.com/" target="_blank">Geoapify</a> | © OpenStreetMap <a href="https://www.openstreetmap.org/copyright" target="_blank">contributors</a>',
+      maxZoom: 20,
+      id: 'osm-bright'
+    }).addTo(map);
+
+    // Call fetchAllCoordinates to start the process
+    fetchAllCoordinates();
+  </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+/* profile.css */
+
+.profile-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 3rem;
+  }
+  
+  .profile-form {
+    width: 50%;
+  }
+  
+  .profile-heading {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-label {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.4rem;
+  }
+  
+  .form-actions {
+    margin-top: 2rem;
+  }
+  
+  .btn-update {
+    background-color: #4caf50;
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 1.4rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-update:hover {
+    background-color: #45a049;
+  }
+  
+  .profile-preview {
+    width: 45%;
+  }
+  
+  .profile-preview .profile-heading {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  .profile-preview-image {
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-preview-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  

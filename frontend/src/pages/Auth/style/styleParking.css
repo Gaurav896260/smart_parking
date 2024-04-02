@@ -1,0 +1,68 @@
+/* parkingTicketPage.css */
+
+.parking-ticket-container {
+    max-width: 800px; /* Increased max-width */
+    margin: 0 auto;
+    padding: 40px; /* Increased padding */
+    border: 2px solid #ccc; /* Increased border size */
+    border-radius: 12px; /* Increased border radius */
+    background-color: #535151;
+  }
+  
+  .parking-ticket-container h2 {
+    font-size: 32px; /* Increased font size */
+    margin-bottom: 30px; /* Increased margin */
+  }
+  
+  .parking-ticket-container h3 {
+    font-size: 24px; /* Increased font size */
+    margin-bottom: 20px; /* Increased margin */
+  }
+  
+  .parking-ticket-container p {
+    font-size: 18px; /* Increased font size */
+    margin-bottom: 12px; /* Increased margin */
+  }
+  
+  .parking-ticket-container form {
+    margin-top: 30px; /* Increased margin */
+  }
+  
+  .parking-ticket-container label {
+    font-size: 20px; /* Increased font size */
+    display: block;
+    margin-bottom: 12px; /* Increased margin */
+  }
+  
+  .parking-ticket-container input {
+    width: 100%;
+    padding: 12px; /* Increased padding */
+    margin-bottom: 24px; /* Increased margin */
+    font-size: 20px; /* Increased font size */
+    border: 2px solid #4d4949;
+    border-radius: 6px; /* Increased border radius */
+  }
+  
+  .parking-ticket-container button {
+    padding: 14px 24px; /* Increased padding */
+    font-size: 20px; /* Increased font size */
+    background-color: #4caf50;
+    color: #444141;
+    border: none;
+    border-radius: 6px; /* Increased border radius */
+    cursor: pointer;
+  }
+  
+  .parking-ticket-container button:hover {
+    background-color: #45a049;
+  }
+  
+  .error-message {
+    font-size: 18px; /* Increased font size */
+    color: red;
+  }
+  
+  .success-message {
+    font-size: 18px; /* Increased font size */
+    color: green;
+  }

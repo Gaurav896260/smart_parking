@@ -1,0 +1,23 @@
+/* App.css */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+body {
+  background: rgb(5, 0, 0);
+  color: #fff;
+}
+
+
+/* input ,
+textarea{
+  color: black;
+}
+
+select option {
+  color: black;
+} */
+
+
+
